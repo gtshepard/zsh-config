@@ -14,8 +14,7 @@ alias gca='git commit --amend'
 
 # Branch
 alias gb='git branch'
-alias gbd='git branch -d'
-alias gbD='git branch -D'
+alias gbdf='git branch -D'
 alias gco='git checkout'
 alias gcb='git checkout -b'
 
@@ -80,9 +79,9 @@ gnb() {
 }
 
 # Delete branch locally and remotely
-gbd() {
+gbdr() {
     if [ -z "$1" ]; then
-        echo "Usage: gbd <branch-name>"
+        echo "Usage: gbdr <branch-name>"
         return 1
     fi
     git branch -d "$1" && git push origin --delete "$1"
@@ -221,14 +220,6 @@ grfs() {
         return 1
     fi
     git restore --source="$1" --staged "$2"
-}
-
-# Interactive restore using fzf (requires fzf)
-gri() {
-    local files=$(git status -s | fzf -m | awk '{print $2}')
-    if [ -n "$files" ]; then
-        echo "$files" | xargs git restore
-    fi
 }
 
 # Interactive unstage using fzf (requires fzf)
