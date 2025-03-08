@@ -16,7 +16,6 @@ alias gca='git commit --amend'
 alias gb='git branch'
 alias gbdf='git branch -D'
 alias gco='git checkout'
-alias gcb='git checkout -b'
 
 # Pull/Push
 alias gp='git push'
@@ -103,9 +102,7 @@ gfp() {
 }
 
 # Interactive checkout for branches using fzf (requires fzf installed)
-gch() {
-    git checkout "$(git branch --all | grep -v HEAD | fzf | sed "s/.* //" | sed "s#remotes/[^/]*/##")"
-}
+
 
 # Stash with a description
 gss() {
@@ -308,7 +305,7 @@ ghelp() {
 alias gcan='git commit --amend --no-edit'
 
 # Show current branch name
-alias gcb='git rev-parse --abbrev-ref HEAD'
+alias gbns="git rev-parse --abbrev-ref HEAD"  # Using double quotes instead
 
 # List branches sorted by last commit date
 alias gbs='git for-each-ref --sort="-committerdate" --format="%(committerdate:short) %(refname:short)" refs/heads/'
@@ -318,4 +315,13 @@ alias gg='git grep --break --heading --line-number'
 
 # Show most recently modified branches
 alias gbr='git for-each-ref --sort=-committerdate refs/heads/ --format="%(committerdate:relative)%09%(refname:short)"'
+
+# Branch creation with better handling of slashes
+gcb() {
+    if [ -z "$1" ]; then
+        echo "Usage: gcb <branch-name>"
+        return 1
+    fi
+    git checkout -b "$1"
+}
 
