@@ -55,7 +55,6 @@ Note: If you already have a `.zshrc`, make sure to backup your existing configur
 mv ~/.zshrc ~/.zshrc.backup
 ```
 
-
 ```bash
 cp ~/.zsh-config/.zshrc ~/.zshrc
 ```
